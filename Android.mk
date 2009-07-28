@@ -31,9 +31,12 @@ LOCAL_SYSTEM_SHARED_LIBRARIES :=
 # i.e. to guarantee that the IEEE 754 core functions are used
 LOCAL_CFLAGS := "-D_IEEE_LIBM"
 
-ifneq ($(filter $(TARGET_ARCH),arm x86),)
+ifneq ($(filter $(TARGET_ARCH),arm x86 mips),)
 # When __LITTLE_ENDIAN is set, the source will compile for little endian cpus.
 LOCAL_CFLAGS += "-D__LITTLE_ENDIAN"
 endif 
+ifeq ($(TARGET_ARCH),mips)
+LOCAL_CFLAGS += -fno-strict-aliasing
+endif
 
 include $(BUILD_STATIC_LIBRARY)
