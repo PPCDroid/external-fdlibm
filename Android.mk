@@ -35,7 +35,8 @@ ifneq ($(filter $(TARGET_ARCH),arm x86 mips),)
 # When __LITTLE_ENDIAN is set, the source will compile for little endian cpus.
 LOCAL_CFLAGS += "-D__LITTLE_ENDIAN"
 endif 
-ifeq ($(TARGET_ARCH),mips)
+
+ifneq ($(filter $(TARGET_ARCH), ppc mips),)
 LOCAL_CFLAGS += -fno-strict-aliasing
 endif
 
